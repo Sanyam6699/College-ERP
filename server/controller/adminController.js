@@ -114,7 +114,7 @@ export const addAdmin = async (req, res) => {
       return res.status(400).json(errors);
     }
     const existingDepartment = await Department.findOne({ department });
-    let departmentHelper = existingDepartment.departmentCode;
+    let departmentHelper = existingDepartment? existingDepartment.departmentCode : "";
     const admins = await Admin.find({ department });
 
     let helper;
@@ -134,6 +134,7 @@ export const addAdmin = async (req, res) => {
 
     hashedPassword = await bcrypt.hash(newDob, 10);
     var passwordUpdated = false;
+    
     const newAdmin = await new Admin({
       name,
       email,
@@ -147,6 +148,7 @@ export const addAdmin = async (req, res) => {
       passwordUpdated,
     });
     await newAdmin.save();
+    
     return res.status(200).json({
       success: true,
       message: "Admin registerd successfully",

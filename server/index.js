@@ -1,9 +1,8 @@
 import express from "express";
 import bodyParser from "body-parser";
-import mongoose from "mongoose";
+ import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
-
 import adminRoutes from "./routes/adminRoutes.js";
 import studentRoutes from "./routes/studentRoutes.js";
 import facultyRoutes from "./routes/facultyRoutes.js";
@@ -22,7 +21,7 @@ app.get("/", (req, res) => {
   res.send("Hello to college erp API");
 });
 mongoose
-  .connect(process.env.CONNECTION_URL, {
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
